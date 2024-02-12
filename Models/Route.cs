@@ -1,13 +1,25 @@
-﻿namespace APIS.Models
+﻿using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
+
+namespace APIS.Models
 {
     public class Route
     {
-        public int rid { get; set; }
-        public string source { get; set; }
-        public string destination { get; set; }
-        public int distance { get; set; }
-        public int duration { get; set; }
+        [Key]
+        [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
+        public int r_id { get; set; }
 
-        
-    }
+        [Required]
+        [StringLength(50)]
+        public string source { get; set; }
+
+        [Required]
+        [StringLength(50)]
+        public string destination { get; set; }
+
+        [Required]
+        public int distance { get; set;}
+        [Required]
+        public int duration { get; set;}
+ }
 }
