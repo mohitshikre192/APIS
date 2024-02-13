@@ -1,6 +1,9 @@
-﻿namespace APIS.Models
+﻿using Microsoft.EntityFrameworkCore;
+
+namespace APIS.Models
 {
-    public class Context
+    public class Context:DbContext
     {
+
     }
 }
