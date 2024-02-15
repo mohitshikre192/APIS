@@ -3,8 +3,8 @@
 namespace APIS.Models
 {
     public class Context : DbContext
-    {
-        public Context() : base() { }
+    {   
+        public Context(DbContextOptions options) : base(options) { }
         public DbSet<User> Users { get; set; }
         public DbSet<Booking> Bookings { get; set; }
         public DbSet<Vehicle> Vehicles {get;set;}

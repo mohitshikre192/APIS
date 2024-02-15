@@ -10,7 +10,7 @@ namespace APIS.Models
         [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         public int b_id { get; set; }
         [ForeignKey("Vehicle")]
-        public int v_id { get; set; }   
+        public string v_id { get; set; }   
         public virtual Vehicle Vehicle { get; set; }
 
         [Required]

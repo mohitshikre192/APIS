@@ -12,7 +12,7 @@ namespace APIS.Models
         [StringLength(50)]
         [MinLength(2, ErrorMessage = "Name must have two characters")]
         [MaxLength(50, ErrorMessage = "Name can't be longer than 20 characters")]
-        public string name { get; set; }
+        public string d_name { get; set; }
         [Required(ErrorMessage = "Address is required")]
         [StringLength(128)]
         [MaxLength(128,ErrorMessage ="Address can't be longer...")]
