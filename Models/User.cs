@@ -20,7 +20,7 @@ namespace APIS.Models
         [MinLength(2,ErrorMessage ="Name must have two characters")]
         [MaxLength(50,ErrorMessage = "Name can't be longer than 20 characters")]
           public string Name { get; set; }
-            [Required]
+        [Required]
           public Gender gender { get; set; }
         [Required]
         [EmailAddress(ErrorMessage ="Verify email is invalid")]
