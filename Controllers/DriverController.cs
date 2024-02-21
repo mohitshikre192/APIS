@@ -46,7 +46,7 @@ namespace APIS.Controllers
             _context.Drivers.Add(driver);
             await _context.SaveChangesAsync();
             return CreatedAtAction("GetbyId", new { id = driver.d_id }, driver);
-
+                
         }
 
         [HttpPut("{id}")]
