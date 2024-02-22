@@ -2,6 +2,7 @@
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
+using System.Data;
 
 namespace APIS.Controllers
 {
@@ -20,19 +21,30 @@ namespace APIS.Controllers
 
         public async Task<ActionResult<IEnumerable<Vehicle>>> GetAllVehicle()
         {
+            var drivers = _context.Drivers;
             var vehicles = await _context.Vehicles.ToListAsync();
+
             return Ok(vehicles);
         }
 
-        //[HttpGet("query")]
+        //[HttpGet]
 
-        //public async Task<ActionResult<Vehicle>>
-        //    GetById_V([FromQuery] string v_no)
+        //public IActionResult GetVehiclebyNo(string vn)
         //{
-        //    var vehicle = await _context.Vehicles.FindAsync(v_no);
-        //    if (vehicle == null) return NotFound();
-        //    else return vehicle;
+        //    var result = _context.Vehicles.Where(e => e.v_no == vn).ToList();
+        //    return Ok(result);
+
         //}
+
+        [HttpGet("{v_no}")]
+
+        public async Task<ActionResult<Vehicle>>
+            GetById_V( string v_no)
+        {
+            var vehicle = await _context.Vehicles.FindAsync(v_no);
+            if (vehicle == null) return NotFound();
+            else return vehicle;
+        }
 
         //[HttpGet("query")]
 
