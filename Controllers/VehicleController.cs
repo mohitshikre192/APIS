@@ -2,7 +2,10 @@
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
+using NuGet.Frameworks;
+using System;
 using System.Data;
+using System.Net;
 
 namespace APIS.Controllers
 {
@@ -22,9 +25,25 @@ namespace APIS.Controllers
         public async Task<ActionResult<IEnumerable<Vehicle>>> GetAllVehicle()
         {
             var drivers = _context.Drivers;
-            var vehicles = await _context.Vehicles.ToListAsync();
 
-            return Ok(vehicles);
+          //  var vehicles = await _context.Vehicles.ToListAsync() ;
+                 
+            
+             var veh= from vehicle  in  _context.Vehicles
+            join driver in _context.Drivers
+                      on vehicle.d_id equals driver.d_id
+                      select new
+                      {   vehicle.v_no, vehicle.v_name, vehicle.fare,
+                      vehicle.v_type,vehicle.sitting_cap,
+                          driver.d_id,
+                          driver.d_name,
+                          driver.mobileno,
+                          driver.address,
+                          driver.licenseno
+                      };
+
+
+            return Ok(veh);
         }
 
         //[HttpGet]
@@ -41,9 +60,29 @@ namespace APIS.Controllers
         public async Task<ActionResult<Vehicle>>
             GetById_V( string v_no)
         {
-            var vehicle = await _context.Vehicles.FindAsync(v_no);
-            if (vehicle == null) return NotFound();
-            else return vehicle;
+           // var vehicle = await _context.Vehicles.FindAsync(v_no);
+
+            var veh= 
+                      from vehicle in _context.Vehicles
+                      join driver in _context.Drivers
+                        on vehicle.d_id equals driver.d_id
+                      where vehicle.v_no == v_no
+                      select new
+                      {
+                          vehicle.v_no,
+                          vehicle.v_name,
+                          vehicle.fare,
+                          vehicle.v_type,
+                          vehicle.sitting_cap,
+                          driver.d_id,
+                          driver.d_name,
+                          driver.mobileno,
+                          driver.address,
+                          driver.licenseno
+                      };
+
+            if (veh == null) return NotFound();
+            else return Ok(veh);
         }
 
         //[HttpGet("query")]
@@ -53,6 +92,16 @@ namespace APIS.Controllers
         //    var vehicle = await _context.Vehicles.FindAsync(d_id);
         //    if (vehicle == null) return NotFound();
         //    else return vehicle;
+        //}
+
+
+        //[HttpPost]
+
+        //public async Task<ActionResult<Vehicle>> CreateVehicle(Vehicle vehicle)
+        //{
+        //    _context.Vehicles.Add(vehicle);
+        //    await _context.SaveChangesAsync();
+        //    return CreatedAtAction(nameof(GetById_V), vehicle);
         //}
 
 
@@ -103,6 +152,8 @@ namespace APIS.Controllers
 
 
         //}
+
+
 
         private bool VehicleExists(string id)
         {
