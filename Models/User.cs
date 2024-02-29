@@ -31,5 +31,16 @@ namespace APIS.Models
         [DisplayName("Date of Birth")]
         [DataType(DataType.Date), DisplayFormat(DataFormatString = "{0:dd/MM/yyyy}", ApplyFormatInEditMode = true)]
           public DateTime DOB { get; set; }
-  }
+
+        [Required(ErrorMessage = "Mobile no. is required")]
+        [RegularExpression("^(?!0+$)(\\+\\d{1,3}[- ]?)?(?!0+$)\\d{10,15}$", ErrorMessage = "Please enter valid phone no.")]
+        public string mobile_no { get; set; }
+
+        [Required(ErrorMessage = "Password is required.")]
+        [DataType(DataType.Password)]
+        [StringLength(20, MinimumLength = 6, ErrorMessage = "Password must be between 6 and 20 characters.")]
+
+        public string password { get; set; }
+
+    }
 }

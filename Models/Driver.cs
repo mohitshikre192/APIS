@@ -17,7 +17,7 @@ namespace APIS.Models
         [StringLength(128)]
         [MaxLength(128,ErrorMessage ="Address can't be longer...")]
         public string address { get; set; }
-        
+        [Key]
         [Required(ErrorMessage = "Mobile no. is required")]
         [RegularExpression("^(?!0+$)(\\+\\d{1,3}[- ]?)?(?!0+$)\\d{10,15}$", ErrorMessage = "Please enter valid phone no.")]
         public string mobileno { get; set; }
@@ -25,5 +25,14 @@ namespace APIS.Models
         [Required(ErrorMessage = "license no. is required")]
         [StringLength(50)]
         public string licenseno { get; set; }
- }
+
+        [Required(ErrorMessage = "Password is required.")]
+        [DataType(DataType.Password)]
+        [StringLength(20, MinimumLength = 6, ErrorMessage = "Password must be between 6 and 20 characters.")]
+
+        public string password { get; set; }
+
+        [NotMapped]
+        public string c_password { get; set; }
+    }
 }
