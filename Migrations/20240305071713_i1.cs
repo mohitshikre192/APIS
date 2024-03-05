@@ -6,7 +6,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 namespace APIS.Migrations
 {
     /// <inheritdoc />
-    public partial class initialmg : Migration
+    public partial class i1 : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
@@ -17,10 +17,12 @@ namespace APIS.Migrations
                 {
                     d_id = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
+                    role = table.Column<string>(type: "nvarchar(10)", maxLength: 10, nullable: false,defaultValue:"driver"),
                     d_name = table.Column<string>(type: "nvarchar(50)", maxLength: 50, nullable: false),
                     address = table.Column<string>(type: "nvarchar(128)", maxLength: 128, nullable: false),
                     mobileno = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    licenseno = table.Column<string>(type: "nvarchar(50)", maxLength: 50, nullable: false)
+                    licenseno = table.Column<string>(type: "nvarchar(50)", maxLength: 50, nullable: false),
+                    password = table.Column<string>(type: "nvarchar(20)", maxLength: 20, nullable: false)
                 },
                 constraints: table =>
                 {
@@ -50,9 +52,12 @@ namespace APIS.Migrations
                     Id = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
                     Name = table.Column<string>(type: "nvarchar(50)", maxLength: 50, nullable: false),
+                    role = table.Column<string>(type: "nvarchar(10)", maxLength: 10, nullable: false,defaultValue:"user"),
                     gender = table.Column<int>(type: "int", nullable: false),
                     Email = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    DOB = table.Column<DateTime>(type: "datetime2", nullable: false)
+                    DOB = table.Column<DateTime>(type: "datetime2", nullable: false),
+                    mobile_no = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    password = table.Column<string>(type: "nvarchar(20)", maxLength: 20, nullable: false)
                 },
                 constraints: table =>
                 {

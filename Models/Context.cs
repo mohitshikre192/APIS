@@ -10,7 +10,7 @@ namespace APIS.Models
         public DbSet<Vehicle> Vehicles {get;set;}
         public DbSet<Route>  Routes {get;set;}
         public DbSet<Driver> Drivers {get;set;}
-        public DbSet<Login> Logins { get; set; }
+     //   public DbSet<Login> Logins { get; set; }
 
     }
 

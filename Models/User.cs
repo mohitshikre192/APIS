@@ -12,14 +12,22 @@ namespace APIS.Models
         Female,
     }
     public class User
-    {   [Key]
+    {
+        private string n = "user";
+        [Key]
         [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
          public int Id { get; set; }
         [Required]
         [StringLength(50)]
         [MinLength(2,ErrorMessage ="Name must have two characters")]
         [MaxLength(50,ErrorMessage = "Name can't be longer than 20 characters")]
-          public string Name { get; set; }
+        public string Name
+        {
+            get; set; }
+            [StringLength(10)]
+        [DefaultValue("user")]
+        public string role { get { return n; } set { value = n; } } 
+     
         [Required]
           public Gender gender { get; set; }
         [Required]
@@ -30,7 +38,7 @@ namespace APIS.Models
         [MaxAge(100)]
         [DisplayName("Date of Birth")]
         [DataType(DataType.Date), DisplayFormat(DataFormatString = "{0:dd/MM/yyyy}", ApplyFormatInEditMode = true)]
-          public DateTime DOB { get; set; }
+          public DateTime? DOB { get; set; }= DateTime.Now;
 
         [Required(ErrorMessage = "Mobile no. is required")]
         [RegularExpression("^(?!0+$)(\\+\\d{1,3}[- ]?)?(?!0+$)\\d{10,15}$", ErrorMessage = "Please enter valid phone no.")]
@@ -42,5 +50,7 @@ namespace APIS.Models
 
         public string password { get; set; }
 
+        [NotMapped]
+        public string c_password { get { return password; } set { value = password; } }
     }
 }

@@ -13,5 +13,5 @@ namespace APIS.Models
 
         public string Password { get; set; }
     }
-    }
+    
 }
