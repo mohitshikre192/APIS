@@ -1,4 +1,5 @@
 ﻿using APIS.Models;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Infrastructure;
@@ -6,6 +7,7 @@ using Microsoft.EntityFrameworkCore;
 
 namespace APIS.Controllers
 {
+    [Authorize]
     [Route("api/[controller]")]
     [ApiController]
     public class DriverController : ControllerBase

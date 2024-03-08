@@ -5,13 +5,9 @@ namespace APIS.Models
     public class Login
     {
 
-        public int Id { get; set; }
-
-        [ForeignKey("Driver")]
-        public string Username { get; set; }
-
-
-        public string Password { get; set; }
+        public string mobile_no{ get; set; }
+        public string password { get; set; }
+        public string role { get; set; }
     }
     
 }

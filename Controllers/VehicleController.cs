@@ -1,4 +1,5 @@
 ﻿using APIS.Models;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
@@ -9,6 +10,7 @@ using System.Net;
 
 namespace APIS.Controllers
 {
+    [Authorize]
     [Route("api/[controller]")]
     [ApiController]
     public class VehicleController : ControllerBase

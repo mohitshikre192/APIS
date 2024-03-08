@@ -1,10 +1,12 @@
 ﻿using APIS.Models;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 
 namespace APIS.Controllers
 {
+    [Authorize]
     [Route("api/[controller]")]
     [ApiController]
     public class RouteController : ControllerBase
@@ -15,7 +17,6 @@ namespace APIS.Controllers
         {
             this._context = context;
         }
-
         [HttpGet]
         public async Task<ActionResult<IEnumerable<Models.Route>>> GetAllRoutes()
         {
