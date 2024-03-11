@@ -42,7 +42,7 @@ namespace APIS.Controllers
 
             else if(user.role == "driver")
                  if (context.Drivers.Any(x => x.mobileno.Equals(user.mobile_no) && x.password.Equals(user.password)))
-            {
+                {
                 _user = new Login
                 {
                     mobile_no = user.mobile_no,
