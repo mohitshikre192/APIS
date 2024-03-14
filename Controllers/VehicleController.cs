@@ -10,7 +10,7 @@ using System.Net;
 
 namespace APIS.Controllers
 {
-    [Authorize]
+
     [Route("api/[controller]")]
     [ApiController]
     public class VehicleController : ControllerBase
@@ -57,7 +57,7 @@ namespace APIS.Controllers
 
         //}
 
-        [HttpGet("{v_no}")]
+        [HttpGet("vehicle/{v_no}")]
 
         public async Task<ActionResult<Vehicle>>
             GetById_V( string v_no)

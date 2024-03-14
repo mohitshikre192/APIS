@@ -41,6 +41,7 @@ namespace APIS.Controllers
             return driver;
         }
 
+        [AllowAnonymous]
         [HttpPost]
 
         public async Task<ActionResult<Driver>> SignUP(Driver driver)

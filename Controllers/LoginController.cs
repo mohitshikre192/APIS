@@ -82,7 +82,8 @@ namespace APIS.Controllers
             if (user_ != null)
             {
                 var token = GeneratedToken(user_);
-                response = Ok(new { token = token });
+                response = Ok(new { token = token,
+                                    mobileno= user.mobile_no});
             }
             return response;
 }

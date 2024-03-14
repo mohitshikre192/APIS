@@ -3,6 +3,8 @@ using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
+using System;
+using System.Linq;
 
 namespace APIS.Controllers
 {
@@ -16,6 +18,7 @@ namespace APIS.Controllers
           context= _context;
 
         }
+        [AllowAnonymous]
         [HttpGet]
         public async Task<ActionResult<IEnumerable<User>>> GetAllUsers()
         {
@@ -37,7 +40,27 @@ namespace APIS.Controllers
                 return user;
         }
 
+        [AllowAnonymous]
+
+        [HttpGet("mobile_no/{mobile_no}")]
+        public async Task<ActionResult<User>> GetUserbyM(string mobile_no)
+        {
+            var user = await context.Users.
+            FirstOrDefaultAsync(a => a.mobile_no == mobile_no);
+
+
+            if (user == null)
+            {
+                return NotFound();
+            }
+            else
+                return user;
+        }
+
+
         [HttpPost]
+
+        [AllowAnonymous]
         public async Task<ActionResult<User>> CreateUser(User user)
         {
             context.Users.Add(user);
