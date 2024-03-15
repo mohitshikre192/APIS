@@ -1,5 +1,6 @@
 ﻿
 using APIS.Validators;
+using Microsoft.EntityFrameworkCore;
 using System.ComponentModel;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
@@ -10,7 +11,9 @@ namespace APIS.Models
     {
         Male,
         Female,
+        Others
     }
+    [Index(nameof(mobile_no), IsUnique = true, Name = "UniqueIndex")]
     public class User
     {
         private string n = "user";
@@ -42,6 +45,7 @@ namespace APIS.Models
 
         [Required(ErrorMessage = "Mobile no. is required")]
         [RegularExpression("^(?!0+$)(\\+\\d{1,3}[- ]?)?(?!0+$)\\d{10,15}$", ErrorMessage = "Please enter valid phone no.")]
+        
         public string mobile_no { get; set; }
 
         [Required(ErrorMessage = "Password is required.")]

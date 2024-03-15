@@ -1,9 +1,11 @@
 ﻿using System.ComponentModel.DataAnnotations.Schema;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel;
+using Microsoft.EntityFrameworkCore;
 
 namespace APIS.Models
 {
+    [Index(nameof(mobileno), IsUnique = true, Name = "UniqueIndexD")]
     public class Driver
     {
         private string n = "driver";
