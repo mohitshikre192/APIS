@@ -9,7 +9,7 @@ namespace APIS.Models
         [Key]
         [Required]
         [StringLength(15)]
-        [MinLength(13,ErrorMessage ="Vehicle number must be valid")]
+        [MinLength(10,ErrorMessage ="Vehicle number must be valid")]
         [MaxLength(15,ErrorMessage ="Vehicle number can't be that long")]
         public string v_no { get; set; }
 
@@ -23,12 +23,13 @@ namespace APIS.Models
         [Required]
         [StringLength(128)]
         [MinLength(2,ErrorMessage ="Atleast define Vehicle type with more than 2 character")]
-        
+
+        public string v_Image { get; set; }
         public string v_type { get; set; }
         [Required(ErrorMessage ="Fare per km is a required!!!")]
         public int fare {  get; set; }
-        [ForeignKey("Driver")]
-        public int d_id { get; set; }
-        public virtual Driver Driver { get; set; }
+        //[ForeignKey("Driver")]
+        //public int d_id { get; set; }
+        //public virtual Driver Driver { get; set; }
     }
 }

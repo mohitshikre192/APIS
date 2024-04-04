@@ -28,132 +28,36 @@ namespace APIS.Controllers
         {
             var drivers = _context.Drivers;
 
-          //  var vehicles = await _context.Vehicles.ToListAsync() ;
-                 
-            
-             var veh= from vehicle  in  _context.Vehicles
-            join driver in _context.Drivers
-                      on vehicle.d_id equals driver.d_id
-                      select new
-                      {   vehicle.v_no, vehicle.v_name, vehicle.fare,
-                      vehicle.v_type,vehicle.sitting_cap,
-                          driver.d_id,
-                          driver.d_name,
-                          driver.mobileno,
-                          driver.address,
-                          driver.licenseno
-                      };
+            //  var vehicles = await _context.Vehicles.ToListAsync() ;
 
+            var veh = await _context.Vehicles.ToListAsync();
+           
 
             return Ok(veh);
         }
 
-        //[HttpGet]
+        [HttpPost]
 
-        //public IActionResult GetVehiclebyNo(string vn)
-        //{
-        //    var result = _context.Vehicles.Where(e => e.v_no == vn).ToList();
-        //    return Ok(result);
-
-        //}
-
-        [HttpGet("vehicle/{v_no}")]
-
-        public async Task<ActionResult<Vehicle>>
-            GetById_V( string v_no)
+        [AllowAnonymous]
+        public async Task<ActionResult<Vehicle>> CreateVehicle(Vehicle vehicle)
         {
-           // var vehicle = await _context.Vehicles.FindAsync(v_no);
+            _context.Vehicles.Add(vehicle);
+            await _context.SaveChangesAsync();
+            return CreatedAtAction(nameof(GetVehiclebyNo), new { v_no = vehicle.v_no }, vehicle);
 
-            var veh= 
-                      from vehicle in _context.Vehicles
-                      join driver in _context.Drivers
-                        on vehicle.d_id equals driver.d_id
-                      where vehicle.v_no == v_no
-                      select new
-                      {
-                          vehicle.v_no,
-                          vehicle.v_name,
-                          vehicle.fare,
-                          vehicle.v_type,
-                          vehicle.sitting_cap,
-                          driver.d_id,
-                          driver.d_name,
-                          driver.mobileno,
-                          driver.address,
-                          driver.licenseno
-                      };
-
-            if (veh == null) return NotFound();
-            else return Ok(veh);
         }
 
-        //[HttpGet("query")]
+    
 
-        //public async Task<ActionResult<Vehicle>>GetById_D([FromQuery] int d_id)
-        //    {
-        //    var vehicle = await _context.Vehicles.FindAsync(d_id);
-        //    if (vehicle == null) return NotFound();
-        //    else return vehicle;
-        //}
+       [HttpGet("vehicle/{v_no}")]
 
+        public IActionResult GetVehiclebyNo(string v_no)
+        {
+            var result = _context.Vehicles.Where(e => e.v_no == v_no).ToList();
+            return Ok(result);
 
-        //[HttpPost]
+        }
 
-        //public async Task<ActionResult<Vehicle>> CreateVehicle(Vehicle vehicle)
-        //{
-        //    _context.Vehicles.Add(vehicle);
-        //    await _context.SaveChangesAsync();
-        //    return CreatedAtAction(nameof(GetById_V), vehicle);
-        //}
-
-
-        //[HttpPut("{v_no}")]
-
-        //public async Task<ActionResult> updateVehicle(string id, Vehicle vehicle)
-        //{
-
-        //    if (id != vehicle.v_no)
-        //    {
-        //        return BadRequest();
-        //    }
-        //    _context.Entry(vehicle).State = EntityState.Modified;
-        //    try
-        //    {
-        //        await _context.SaveChangesAsync();
-        //    }
-        //    catch (DbUpdateConcurrencyException)
-        //    {
-        //        if (!VehicleExists(id))
-        //        {
-        //            return NotFound();
-
-        //        }
-        //        else
-        //        {
-        //            throw;
-        //        }
-
-        //    }
-        //    return NoContent();
-
-        //}
-
-
-        //[HttpDelete("{v_no}")]
-
-
-        //public async Task<ActionResult<Vehicle>> DeleteVehicle(string v_no)
-        //{
-        //    var vehicle = await _context.Vehicles.FindAsync(v_no);
-        //    if (vehicle == null)
-        //    { return NotFound(); }
-        //    _context.Vehicles.Remove(vehicle);
-        //    await _context.SaveChangesAsync();
-
-        //    return vehicle;
-
-
-        //}
 
 
 

@@ -10,6 +10,7 @@ namespace APIS.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
+    [AllowAnonymous]
     public class LoginController : ControllerBase
     {
         Context context;
@@ -26,9 +27,9 @@ namespace APIS.Controllers
             Login _user = null;
            
 
-            if (user.role == "user")
+            if (user.role.Equals("user"))
             {
-                if (context.Users.Any(x => x.mobile_no.Equals(user.mobile_no) &&x.password.Equals(user.password)))
+                if (context.Users.Any(x => x.mobile_no.Equals(user.mobile_no) &&x.password.Equals(user.password) && x.role.Equals("user")))
                 {
                     _user = new Login
                     {
@@ -40,8 +41,8 @@ namespace APIS.Controllers
                 }
             }
 
-            else if(user.role == "driver")
-                 if (context.Drivers.Any(x => x.mobileno.Equals(user.mobile_no) && x.password.Equals(user.password)))
+            else if(user.role.Equals("admin"))
+                 if (context.Users.Any(x => x.mobile_no.Equals(user.mobile_no) && x.password.Equals(user.password) && x.role.Equals("admin")))
                 {
                 _user = new Login
                 {

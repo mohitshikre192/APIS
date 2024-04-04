@@ -4,6 +4,7 @@ using APIS.Models;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -11,9 +12,11 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace APIS.Migrations
 {
     [DbContext(typeof(Context))]
-    partial class ContextModelSnapshot : ModelSnapshot
+    [Migration("20240402085234_i3")]
+    partial class i3
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -192,6 +195,9 @@ namespace APIS.Migrations
                         .HasMaxLength(15)
                         .HasColumnType("nvarchar(15)");
 
+                    b.Property<int>("d_id")
+                        .HasColumnType("int");
+
                     b.Property<int>("fare")
                         .HasColumnType("int");
 
@@ -214,6 +220,8 @@ namespace APIS.Migrations
 
                     b.HasKey("v_no");
 
+                    b.HasIndex("d_id");
+
                     b.ToTable("Vehicles");
                 });
 
@@ -234,6 +242,17 @@ namespace APIS.Migrations
                     b.Navigation("Route");
 
                     b.Navigation("Vehicle");
+                });
+
+            modelBuilder.Entity("APIS.Models.Vehicle", b =>
+                {
+                    b.HasOne("APIS.Models.Driver", "Driver")
+                        .WithMany()
+                        .HasForeignKey("d_id")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Driver");
                 });
 #pragma warning restore 612, 618
         }
